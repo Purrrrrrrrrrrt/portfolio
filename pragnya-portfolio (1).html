@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pragnya Madiraju — Marketing Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F9F5EE; --ink: #1A1208; --terracotta: #C4502A;
+    --warm-mid: #8B3A1E; --gold: #D4A853; --soft-bg: #F2EDE3;
+    --muted: #7A6B58; --border: #DDD5C4;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(249,245,238,0.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; font-size: 0.85rem; color: var(--muted); font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 5rem; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 4rem 3rem 4rem 5rem; }
+  .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terracotta); font-weight: 500; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease 0.1s both; }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 900; line-height: 1.05; color: var(--ink); margin-bottom: 1.8rem; animation: fadeUp 0.6s ease 0.25s both; }
+  .hero-name em { font-style: italic; color: var(--terracotta); }
+  .hero-desc { font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 440px; font-weight: 300; margin-bottom: 2.5rem; animation: fadeUp 0.6s ease 0.4s both; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 3rem; animation: fadeUp 0.6s ease 0.5s both; }
+  .tag { font-size: 0.78rem; padding: 0.4rem 1rem; border: 1px solid var(--border); border-radius: 100px; color: var(--muted); letter-spacing: 0.04em; }
+  .hero-cta-row { display: flex; gap: 1rem; align-items: center; animation: fadeUp 0.6s ease 0.6s both; }
+  .btn-primary { display: inline-block; padding: 0.85rem 2rem; background: var(--terracotta); color: #fff; text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em; border-radius: 4px; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--warm-mid); }
+  .btn-ghost { display: inline-block; padding: 0.85rem 2rem; border: 1px solid var(--ink); color: var(--ink); text-decoration: none; font-size: 0.88rem; font-weight: 400; letter-spacing: 0.06em; border-radius: 4px; transition: all 0.2s; }
+  .btn-ghost:hover { background: var(--ink); color: var(--cream); }
+  .hero-right { background: var(--soft-bg); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .hero-graphic { position: relative; width: 340px; height: 440px; }
+  .circle-big { width: 320px; height: 320px; border-radius: 50%; background: var(--terracotta); position: absolute; top: 50px; left: 10px; opacity: 0.12; }
+  .circle-outline { width: 260px; height: 260px; border-radius: 50%; border: 2px solid var(--gold); position: absolute; top: 90px; left: 50px; opacity: 0.5; }
+  .hero-initials { font-family: 'Playfair Display', serif; font-size: 9rem; font-weight: 900; font-style: italic; color: var(--terracotta); opacity: 0.15; position: absolute; bottom: 20px; right: 0; line-height: 1; }
+  .hero-stat-cards { position: absolute; display: flex; flex-direction: column; gap: 1rem; right: -20px; top: 50%; transform: translateY(-50%); }
+  .stat-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.2rem; min-width: 150px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .stat-card .num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--terracotta); line-height: 1; }
+  .stat-card .label { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; }
+
+  section { padding: 6rem 5rem; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); font-weight: 500; margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: var(--ink); line-height: 1.1; margin-bottom: 1rem; }
+  .section-body { font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 600px; font-weight: 300; }
+  .divider { width: 60px; height: 2px; background: var(--terracotta); margin: 1.5rem 0; }
+
+  .about { background: var(--ink); color: var(--cream); }
+  .about .section-label { color: var(--gold); }
+  .about .section-title { color: var(--cream); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3.5rem; align-items: start; }
+  .about .section-body { color: #C8BCA8; max-width: 100%; }
+  .about-interests { margin-top: 2rem; }
+  .about-interests h4 { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+  .interest-list { display: flex; flex-direction: column; gap: 0.7rem; }
+  .interest-item { display: flex; align-items: center; gap: 0.8rem; font-size: 0.92rem; color: #C8BCA8; }
+  .interest-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--terracotta); flex-shrink: 0; }
+  .about-info { border-left: 1px solid #3A3020; padding-left: 3rem; }
+  .info-block { margin-bottom: 2rem; }
+  .info-block label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.4rem; }
+  .info-block p { font-size: 0.95rem; color: #C8BCA8; }
+  .info-block a { color: #C8BCA8; text-decoration: underline; text-underline-offset: 3px; }
+  .info-block a:hover { color: var(--gold); }
+
+  /* ── PROJECTS ── */
+  .projects { background: var(--cream); }
+  .projects-intro { margin-bottom: 1.5rem; }
+
+  /* Category row labels */
+  .cat-label {
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); font-weight: 500;
+    margin: 3rem 0 1rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .cat-label:first-of-type { margin-top: 1.5rem; }
+
+  .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .project-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+
+  /* BASE CARD */
+  .project-card {
+    background: var(--soft-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--terracotta); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.09); }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  /* HIGHLIGHTED cards (case study + research) */
+  .project-card.highlight {
+    background: var(--ink); border-color: transparent; color: var(--cream);
+  }
+  .project-card.highlight .project-title { color: var(--cream); }
+  .project-card.highlight .project-desc { color: #A89880; }
+  .project-card.highlight .project-type { color: var(--gold); }
+  .project-card.highlight .project-num { color: var(--gold); opacity: 0.2; }
+  .project-card.highlight .skill-pill { background: #2A2010; border-color: #3A3020; color: #A89880; }
+  .project-card.highlight .project-link { color: var(--gold); border-color: var(--gold); }
+  .project-card.highlight::before { background: var(--gold); }
+  .highlight-badge {
+    display: inline-block; font-size: 0.65rem; letter-spacing: 0.14em;
+    text-transform: uppercase; background: var(--terracotta); color: #fff;
+    padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.7rem;
+    font-weight: 500;
+  }
+  .project-card.highlight .highlight-badge { background: var(--gold); color: var(--ink); }
+
+  .project-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; font-style: italic; color: var(--terracotta); opacity: 0.15; line-height: 1; margin-bottom: 0.3rem; }
+  .project-type { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.5rem; font-weight: 500; }
+  .project-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--ink); margin-bottom: 0.7rem; line-height: 1.25; }
+  .project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.1rem; font-weight: 300; flex: 1; }
+  .project-skills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+  .skill-pill { font-size: 0.72rem; padding: 0.25rem 0.7rem; background: #fff; border: 1px solid var(--border); border-radius: 100px; color: var(--muted); }
+  .project-link { display: inline-block; font-size: 0.8rem; color: var(--terracotta); text-decoration: none; font-weight: 500; letter-spacing: 0.05em; border-bottom: 1px solid var(--terracotta); padding-bottom: 1px; transition: opacity 0.2s; margin-top: auto; }
+  .project-link:hover { opacity: 0.7; }
+
+  /* EXPANDABLE internship card */
+  .expand-card {
+    background: var(--soft-bg); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    transition: box-shadow 0.25s;
+    grid-column: span 3;
+  }
+  .expand-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+  .expand-header {
+    padding: 2rem; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    position: relative;
+  }
+  .expand-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--terracotta); }
+  .expand-header-left { flex: 1; }
+  .expand-chevron {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid var(--border); background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-left: 1rem; margin-top: 0.2rem;
+    transition: transform 0.3s, background 0.2s;
+    font-size: 0.85rem; color: var(--terracotta);
+  }
+  .expand-card.open .expand-chevron { transform: rotate(180deg); background: var(--terracotta); color: #fff; }
+  .expand-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.45s ease;
+    border-top: 0px solid var(--border);
+  }
+  .expand-card.open .expand-body { max-height: 1200px; border-top-width: 1px; }
+  .expand-inner { padding: 2rem; }
+  .expand-projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 0.5rem; }
+  .sub-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; }
+  .sub-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; font-style: italic; color: var(--terracotta); opacity: 0.2; line-height: 1; margin-bottom: 0.3rem; }
+  .sub-title { font-size: 0.95rem; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem; }
+  .sub-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; margin-bottom: 0.8rem; font-weight: 300; }
+  .sub-skills { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .sub-pill { font-size: 0.68rem; padding: 0.2rem 0.6rem; background: var(--soft-bg); border: 1px solid var(--border); border-radius: 100px; color: var(--muted); }
+
+  /* SKILLS */
+  .skills { background: var(--soft-bg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .skill-group h4 { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 1.2rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
+  .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .skill-list li { font-size: 0.95rem; color: var(--ink); display: flex; align-items: center; gap: 0.6rem; }
+  .skill-list li::before { content: ''; width: 18px; height: 1px; background: var(--terracotta); flex-shrink: 0; }
+
+  /* CONTACT */
+  .contact { background: var(--ink); text-align: center; padding: 7rem 5rem; }
+  .contact .section-label { color: var(--gold); }
+  .contact .section-title { color: var(--cream); margin: 0 auto 1rem; }
+  .contact-tagline { font-size: 1rem; color: #A89880; font-weight: 300; margin-bottom: 3rem; }
+  .contact-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link { display: flex; align-items: center; gap: 0.6rem; padding: 1rem 1.8rem; border: 1px solid #3A3020; border-radius: 8px; color: #C8BCA8; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+  .contact-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  footer { background: var(--ink); border-top: 1px solid #2A2010; padding: 1.5rem 5rem; display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-size: 0.78rem; color: #5A4E3A; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 6rem 2rem 4rem; }
+    section { padding: 4rem 2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-info { border-left: none; padding-left: 0; border-top: 1px solid #3A3020; padding-top: 2rem; }
+    .project-grid, .project-grid.two-col { grid-template-columns: 1fr; }
+    .expand-card { grid-column: span 1; }
+    .expand-projects { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">PM</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Marketing Portfolio</p>
+    <h1 class="hero-name">Pragnya<br><em>Madiraju</em></h1>
+    <p class="hero-desc">Passionate about understanding consumer behavior and helping brands create campaigns that genuinely connect with their audiences.</p>
+    <div class="hero-tags">
+      <span class="tag">Brand Strategy</span>
+      <span class="tag">Consumer Insights</span>
+      <span class="tag">Product Marketing</span>
+      <span class="tag">Market Research</span>
+    </div>
+    <div class="hero-cta-row">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-graphic">
+      <div class="circle-big"></div>
+      <div class="circle-outline"></div>
+      <div class="hero-initials">PM</div>
+    </div>
+    <div class="hero-stat-cards">
+      <div class="stat-card"><div class="num">$13K+</div><div class="label">Raised for PCAA</div></div>
+      <div class="stat-card"><div class="num">300+</div><div class="label">Member org led</div></div>
+      <div class="stat-card"><div class="num">ASU</div><div class="label">Marketing Major</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <p class="section-label">Background</p>
+  <h2 class="section-title">Hi, I'm Pragnya.</h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div>
+      <p class="section-body">I'm a Marketing student at Arizona State University with a strong focus on brand management, consumer insights, product marketing, and digital marketing.</p>
+      <p class="section-body" style="margin-top:1rem;">Through internships, independent research, leadership roles, and hands-on initiatives, I've developed skills in consumer research, competitive analysis, product positioning, event strategy, and marketing strategy. I'm drawn to the intersection of human behavior and brand decision-making.</p>
+      <div class="about-interests">
+        <h4>Areas of Interest</h4>
+        <div class="interest-list">
+          <div class="interest-item"><div class="interest-dot"></div>Brand Management</div>
+          <div class="interest-item"><div class="interest-dot"></div>Product Marketing</div>
+          <div class="interest-item"><div class="interest-dot"></div>Consumer Insights</div>
+          <div class="interest-item"><div class="interest-dot"></div>Market Research</div>
+          <div class="interest-item"><div class="interest-dot"></div>Digital Marketing</div>
+          <div class="interest-item"><div class="interest-dot"></div>Consumer Behavior</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-info">
+      <div class="info-block"><label>University</label><p>Arizona State University</p></div>
+      <div class="info-block"><label>Degree</label><p>Marketing Major</p></div>
+      <div class="info-block"><label>Email</label><p><a href="mailto:madiraju.pragnya05@gmail.com">madiraju.pragnya05@gmail.com</a></p></div>
+      <div class="info-block"><label>LinkedIn</label><p><a href="https://www.linkedin.com/in/pragnya-madiraju" target="_blank">linkedin.com/in/pragnya-madiraju</a></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="projects-intro">
+    <p class="section-label">Experience, Research & Leadership</p>
+    <h2 class="section-title">What I've Done</h2>
+  </div>
+
+  <!-- ── HIGHLIGHTED: Case Study + Research ── -->
+  <p class="cat-label">Research & Analysis</p>
+  <div class="project-grid two-col">
+
+    <!-- RHODE CASE STUDY — highlighted -->
+    <div class="project-card highlight">
+      <span class="highlight-badge">Featured Case Study</span>
+      <div class="project-num">CS</div>
+      <p class="project-type">Independent Analysis — Brand Strategy</p>
+      <h3 class="project-title">Rhode Skin: How a 3-Product Brand Became a $1 Billion Company</h3>
+      <p class="project-desc">A deep-dive analysis into how Rhode disrupted the skincare market through founder-led marketing, radical product simplicity, cultural trend creation, and community-driven growth — culminating in a $1B acquisition by e.l.f. Beauty. Covers SWOT, consumer behavior drivers, distribution strategy, and five replicable marketing lessons.</p>
+      <div class="project-skills">
+        <span class="skill-pill">Brand Strategy</span>
+        <span class="skill-pill">Consumer Behavior</span>
+        <span class="skill-pill">Marketing Analysis</span>
+        <span class="skill-pill">Competitive Research</span>
+        <span class="skill-pill">SWOT Analysis</span>
+      </div>
+      <a href="rhode-case-study.html" target="_blank" class="project-link">Read Full Case Study →</a>
+    </div>
+
+    <!-- IMPULSE BUYING RESEARCH — highlighted -->
+    <div class="project-card highlight">
+      <span class="highlight-badge">Independent Research</span>
+      <div class="project-num">R</div>
+      <p class="project-type">Behavioral Research — Consumer Psychology</p>
+      <h3 class="project-title">Impulse Buying & How Brands Engineer the Unplanned Purchase</h3>
+      <p class="project-desc">An independent research project investigating the psychology behind impulse buying and how brands strategically design environments, messaging, and digital touchpoints to trigger unplanned purchases. Explores behavioral levers including scarcity cues, social proof, emotional priming, and platform-specific conversion tactics.</p>
+      <div class="project-skills">
+        <span class="skill-pill">Consumer Behavior</span>
+        <span class="skill-pill">Behavioral Psychology</span>
+        <span class="skill-pill">Brand Strategy</span>
+        <span class="skill-pill">Market Research</span>
+        <span class="skill-pill">Digital Marketing</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── LEADERSHIP ── -->
+  <p class="cat-label">Leadership & Events</p>
+  <div class="project-grid two-col">
+
+    <!-- KAPPA DELTA VP -->
+    <div class="project-card">
+      <div class="project-num">KD</div>
+      <p class="project-type">Leadership — Kappa Delta Sorority</p>
+      <h3 class="project-title">Vice President of Events & Programming</h3>
+      <p class="project-desc">Lead strategy and execution of large-scale philanthropic and social events for a 300+ member organization. Orchestrated a week-long fundraising initiative that raised over $13,000 for Prevent Child Abuse America (PCAA). Drive participation and visibility through cross-functional collaboration with marketing and PR on targeted campaigns, while overseeing budgets, vendors, and logistics to deliver seamless, high-quality events. Mentor and mobilize members to increase engagement and leadership across the chapter.</p>
+      <div class="project-skills">
+        <span class="skill-pill">Event Strategy</span>
+        <span class="skill-pill">Fundraising</span>
+        <span class="skill-pill">Budget Management</span>
+        <span class="skill-pill">Campaign Collaboration</span>
+        <span class="skill-pill">Team Leadership</span>
+        <span class="skill-pill">Vendor Management</span>
+      </div>
+    </div>
+
+    <!-- PROJECT OUTREACH -->
+    <div class="project-card">
+      <div class="project-num">PO</div>
+      <p class="project-type">Founded — Service Initiative</p>
+      <h3 class="project-title">Project Outreach</h3>
+      <p class="project-desc">Designed and launched an online organization and resource hub dedicated to helping high school students strengthen their college applications. Built and managed the full website end-to-end, curating resources on volunteering opportunities, course selection strategies, SAT/ACT preparation, and internship guidance.</p>
+      <div class="project-skills">
+        <span class="skill-pill">Content Strategy</span>
+        <span class="skill-pill">Web Design</span>
+        <span class="skill-pill">Community Building</span>
+        <span class="skill-pill">Project Management</span>
+      </div>
+      <a href="https://sites.google.com/view/projectoutreachnj/home" target="_blank" class="project-link">Visit Project Outreach →</a>
+    </div>
+
+  </div>
+
+  <!-- ── INTERNSHIP: Dr. Reddy's (expandable) ── -->
+  <p class="cat-label">Internship Experience</p>
+  <div class="project-grid">
+    <div class="expand-card" id="drr-card">
+      <div class="expand-header" onclick="toggleExpand('drr-card')">
+        <div class="expand-header-left">
+          <p class="project-type" style="margin-bottom:0.4rem;">Marketing Intern — Dr. Reddy's Laboratories</p>
+          <h3 class="project-title" style="margin-bottom:0.5rem;">Three Projects Across Brand, Research & Rebranding</h3>
+          <p class="project-desc" style="margin-bottom:0.8rem;">Completed three distinct marketing engagements during an internship at Dr. Reddy's — spanning a children's pharmaceutical product launch, a skincare rebranding initiative, and a field research study with dental professionals. Click to explore each project.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+            <span class="skill-pill">Consumer Research</span>
+            <span class="skill-pill">Product Positioning</span>
+            <span class="skill-pill">Brand Analysis</span>
+            <span class="skill-pill">Competitive Analysis</span>
+            <span class="skill-pill">Qualitative Research</span>
+          </div>
+        </div>
+        <div class="expand-chevron">▾</div>
+      </div>
+      <div class="expand-body">
+        <div class="expand-inner">
+          <div class="expand-projects">
+
+            <div class="sub-card">
+              <div class="sub-num">01</div>
+              <div class="sub-title">Children's Toothpaste Product Launch</div>
+              <div class="sub-desc">Supported the launch strategy for a new children's toothpaste product. Conducted research with dental professionals, gathered consumer insights from parents, and assisted with competitive analysis and product positioning discussions. Research revealed parents prioritize safety, ingredient transparency, and dentist recommendations, while children respond to flavor and fun — informing a dual-audience positioning strategy.</div>
+              <div class="sub-skills">
+                <span class="sub-pill">Consumer Research</span>
+                <span class="sub-pill">Interviewing</span>
+                <span class="sub-pill">Competitive Analysis</span>
+                <span class="sub-pill">Product Positioning</span>
+              </div>
+            </div>
+
+            <div class="sub-card">
+              <div class="sub-num">02</div>
+              <div class="sub-title">Lotion Rebranding Initiative</div>
+              <div class="sub-desc">Supported the refresh of an existing skincare lotion brand by evaluating competitor brands, analyzing emerging packaging trends, and researching evolving consumer preferences. Findings showed a clear consumer shift toward cleaner packaging, explicit benefit statements, and modern visual design — contributing to creative development discussions that shaped the brand's updated direction.</div>
+              <div class="sub-skills">
+                <span class="sub-pill">Brand Analysis</span>
+                <span class="sub-pill">Consumer Insights</span>
+                <span class="sub-pill">Trend Analysis</span>
+                <span class="sub-pill">Marketing Strategy</span>
+              </div>
+            </div>
+
+            <div class="sub-card">
+              <div class="sub-num">03</div>
+              <div class="sub-title">Dentist Field Research Project</div>
+              <div class="sub-desc">Conducted first-hand field research by interviewing dental professionals on their oral care product preferences and purchasing influences. Recorded and organized qualitative findings, identifying recurring themes around product effectiveness, ingredient transparency, ease of patient adoption, and brand credibility — insights that directly informed product strategy recommendations.</div>
+              <div class="sub-skills">
+                <span class="sub-pill">Qualitative Research</span>
+                <span class="sub-pill">Data Organization</span>
+                <span class="sub-pill">Consumer Insights</span>
+                <span class="sub-pill">Professional Communication</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASU FOUNDATION -->
+  <div class="project-grid" style="margin-top:1.5rem;">
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <p class="project-type">Event Support — ASU Foundation</p>
+      <h3 class="project-title">ASU Foundation Event Marketing</h3>
+      <p class="project-desc">Supported professional events hosted by the ASU Foundation involving university leadership, major donors, and community partners — assisting with logistics, attendee communications, and guest experience management to help facilitate high-stakes engagements that strengthen institutional relationships and donor investment.</p>
+      <div class="project-skills">
+        <span class="skill-pill">Event Marketing</span>
+        <span class="skill-pill">Stakeholder Communication</span>
+        <span class="skill-pill">Project Coordination</span>
+        <span class="skill-pill">Professionalism</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <p class="section-label">Expertise</p>
+  <h2 class="section-title">Skills & Capabilities</h2>
+  <div class="divider"></div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h4>Marketing</h4>
+      <ul class="skill-list">
+        <li>Consumer Research</li>
+        <li>Competitive Analysis</li>
+        <li>Product Positioning</li>
+        <li>Brand Strategy</li>
+        <li>Market Research</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Digital</h4>
+      <ul class="skill-list">
+        <li>Social Media Marketing</li>
+        <li>Content Development</li>
+        <li>Campaign Planning</li>
+        <li>Marketing Analytics</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Business</h4>
+      <ul class="skill-list">
+        <li>Event Strategy & Execution</li>
+        <li>Budget & Vendor Management</li>
+        <li>Microsoft Excel</li>
+        <li>Presentation Development</li>
+        <li>Professional Communication</li>
+        <li>Project Management</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="section-label">Say Hello</p>
+  <h2 class="section-title" style="max-width: 500px;">Let's Connect</h2>
+  <p class="contact-tagline">Open to internships, collaborations, and conversations about marketing.</p>
+  <div class="contact-links">
+    <a href="mailto:madiraju.pragnya05@gmail.com" class="contact-link">
+      <span class="icon">✉</span>
+      madiraju.pragnya05@gmail.com
+    </a>
+    <a href="https://www.linkedin.com/in/pragnya-madiraju" target="_blank" class="contact-link">
+      <span class="icon">in</span>
+      LinkedIn
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Pragnya Madiraju</p>
+  <p>Marketing Student · Arizona State University</p>
+</footer>
+
+<script>
+  function toggleExpand(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

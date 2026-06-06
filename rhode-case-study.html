@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rhode Skin Case Study — Pragnya Madiraju</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F9F5EE; --ink: #1A1208; --terracotta: #C4502A;
+    --warm-mid: #8B3A1E; --gold: #D4A853; --soft-bg: #F2EDE3;
+    --muted: #7A6B58; --border: #DDD5C4; --dark-border: #3A3020;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--ink); padding: 1rem 3rem;
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .back-link {
+    color: #C8BCA8; text-decoration: none; font-size: 0.82rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--gold); }
+  .topbar-divider { color: #3A3020; }
+  .topbar-title { color: #7A6B58; font-size: 0.82rem; letter-spacing: 0.06em; }
+
+  /* HERO */
+  .cs-hero {
+    background: var(--ink); padding: 5rem 5rem 4rem;
+    border-bottom: 1px solid var(--dark-border);
+  }
+  .cs-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 1rem; }
+  .cs-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900; color: #F9F5EE; line-height: 1.05;
+    margin-bottom: 0.5rem;
+  }
+  .cs-title em { font-style: italic; color: var(--terracotta); }
+  .cs-subtitle { font-size: 1.1rem; color: #A89880; font-weight: 300; margin-bottom: 3rem; max-width: 650px; line-height: 1.6; }
+  .cs-meta { display: flex; gap: 3rem; flex-wrap: wrap; }
+  .cs-meta-item label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.3rem; }
+  .cs-meta-item p { font-size: 0.9rem; color: #C8BCA8; }
+
+  /* EXEC SUMMARY */
+  .exec-summary {
+    background: var(--terracotta); padding: 3rem 5rem;
+    display: grid; grid-template-columns: 1fr 3fr; gap: 3rem; align-items: center;
+  }
+  .exec-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-weight: 500; }
+  .exec-text { font-size: 1.05rem; color: #fff; line-height: 1.75; font-weight: 300; }
+
+  /* STATS STRIP */
+  .stats-strip { background: var(--soft-bg); padding: 2.5rem 5rem; display: flex; gap: 0; border-bottom: 1px solid var(--border); }
+  .stat-item { flex: 1; padding: 0 2rem; border-right: 1px solid var(--border); }
+  .stat-item:first-child { padding-left: 0; }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--terracotta); line-height: 1; margin-bottom: 0.3rem; }
+  .stat-desc { font-size: 0.82rem; color: var(--muted); }
+
+  /* BODY */
+  .cs-body { max-width: 820px; margin: 0 auto; padding: 5rem 3rem; }
+  .cs-section { margin-bottom: 4rem; }
+  .cs-section-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); font-weight: 500; margin-bottom: 0.6rem; }
+  .cs-section-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--ink); margin-bottom: 1.2rem; line-height: 1.2; }
+  .cs-divider { width: 40px; height: 2px; background: var(--terracotta); margin-bottom: 1.5rem; }
+  .cs-body p { font-size: 1rem; color: var(--muted); line-height: 1.85; margin-bottom: 1rem; font-weight: 300; }
+  .cs-body p strong { color: var(--ink); font-weight: 500; }
+
+  /* INSIGHT BOXES */
+  .insight-box { background: var(--ink); border-radius: 12px; padding: 1.8rem 2rem; margin: 2rem 0; }
+  .insight-box .label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .insight-box p { color: #C8BCA8; font-size: 1rem; margin: 0; }
+
+  /* STRATEGY GRID */
+  .strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .strategy-card { background: var(--soft-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+  .strategy-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--terracotta); opacity: 0.2; line-height: 1; margin-bottom: 0.3rem; }
+  .strategy-title { font-size: 0.95rem; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem; }
+  .strategy-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+  /* CONSUMER NEEDS GRID */
+  .needs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  .need-card { background: var(--soft-bg); border-radius: 10px; padding: 1.2rem 1.4rem; border-left: 3px solid var(--terracotta); }
+  .need-type { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); font-weight: 500; margin-bottom: 0.5rem; }
+  .need-items { font-size: 0.85rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+  /* SWOT */
+  .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+  .swot-card { border-radius: 10px; padding: 1.4rem 1.6rem; }
+  .swot-card.s { background: #E8F4E8; }
+  .swot-card.w { background: #FAEEE8; }
+  .swot-card.o { background: #E8EEF8; }
+  .swot-card.t { background: #F8F0E8; }
+  .swot-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.8rem; }
+  .swot-card.s .swot-label { color: #2D6B2D; }
+  .swot-card.w .swot-label { color: #8B3A1E; }
+  .swot-card.o .swot-label { color: #1E3A8B; }
+  .swot-card.t .swot-label { color: #8B6B1E; }
+  .swot-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .swot-list li { font-size: 0.85rem; color: var(--ink); font-weight: 300; display: flex; align-items: flex-start; gap: 0.5rem; }
+  .swot-list li::before { content: '–'; flex-shrink: 0; color: var(--muted); }
+
+  /* LESSONS */
+  .lessons-list { display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; }
+  .lesson-item { display: flex; align-items: flex-start; gap: 1.2rem; padding: 1.2rem 1.5rem; background: var(--soft-bg); border-radius: 10px; }
+  .lesson-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--terracotta); opacity: 0.4; line-height: 1; flex-shrink: 0; min-width: 28px; }
+  .lesson-text { font-size: 0.95rem; color: var(--ink); font-weight: 400; line-height: 1.6; }
+
+  /* CONCLUSION */
+  .conclusion { background: var(--ink); border-radius: 16px; padding: 2.5rem 3rem; margin-top: 3rem; }
+  .conclusion .cs-section-label { color: var(--gold); }
+  .conclusion .cs-section-title { color: #F9F5EE; }
+  .conclusion p { color: #A89880; }
+  .conclusion .cs-divider { background: var(--gold); }
+
+  /* FOOTER */
+  .cs-footer { background: var(--soft-bg); border-top: 1px solid var(--border); padding: 2rem 5rem; display: flex; justify-content: space-between; align-items: center; }
+  .cs-footer p { font-size: 0.8rem; color: var(--muted); }
+  .cs-footer a { color: var(--terracotta); text-decoration: none; font-size: 0.8rem; }
+  .cs-footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    .cs-hero, .exec-summary, .stats-strip { padding: 3rem 1.5rem; }
+    .exec-summary { grid-template-columns: 1fr; gap: 1rem; }
+    .cs-body { padding: 3rem 1.5rem; }
+    .strategy-grid, .swot-grid, .needs-grid { grid-template-columns: 1fr; }
+    .stats-strip { flex-direction: column; gap: 1.5rem; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; padding-left: 0; }
+    .stat-item:last-child { border-bottom: none; }
+    .cs-footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="pragnya-portfolio.html" class="back-link">← Back to Portfolio</a>
+  <span class="topbar-divider">/</span>
+  <span class="topbar-title">Case Study</span>
+</div>
+
+<div class="cs-hero">
+  <p class="cs-label">Brand Strategy · Case Study</p>
+  <h1 class="cs-title">Rhode Skin:<br><em>How Hailey Bieber</em><br>Built a Billion-Dollar Brand</h1>
+  <p class="cs-subtitle">A strategic analysis of how a three-product skincare startup became a $1 billion brand through founder-led marketing, minimalist strategy, and cultural influence.</p>
+  <div class="cs-meta">
+    <div class="cs-meta-item"><label>Author</label><p>Pragnya Madiraju</p></div>
+    <div class="cs-meta-item"><label>Type</label><p>Independent Case Study</p></div>
+    <div class="cs-meta-item"><label>Focus Areas</label><p>Brand Strategy · Consumer Behavior · Digital Marketing</p></div>
+    <div class="cs-meta-item"><label>Outcome</label><p>$1B acquisition by e.l.f. Beauty (2025)</p></div>
+  </div>
+</div>
+
+<div class="exec-summary">
+  <p class="exec-label">Executive Summary</p>
+  <p class="exec-text">Rhode launched in June 2022 with only three products and became one of the fastest-growing beauty brands in the world. By 2025, it was acquired by e.l.f. Beauty in a deal worth up to $1 billion. Rhode achieved this through a combination of strong founder branding, minimalist product strategy, social media virality, community building, and disciplined product expansion.</p>
+</div>
+
+<div class="stats-strip">
+  <div class="stat-item"><div class="stat-num">3</div><div class="stat-desc">Products at launch (June 2022)</div></div>
+  <div class="stat-item"><div class="stat-num">$1B</div><div class="stat-desc">Acquisition value by e.l.f. Beauty</div></div>
+  <div class="stat-item"><div class="stat-num">3 yrs</div><div class="stat-desc">From launch to billion-dollar brand</div></div>
+  <div class="stat-item"><div class="stat-num">Gen Z</div><div class="stat-desc">Core target audience</div></div>
+</div>
+
+<div class="cs-body">
+
+  <!-- THE PROBLEM -->
+  <div class="cs-section">
+    <p class="cs-section-label">Market Context</p>
+    <h2 class="cs-section-title">The Problem Rhode Solved</h2>
+    <div class="cs-divider"></div>
+    <p>Before Rhode launched, the skincare market had become overwhelming. Consumers were faced with complicated multi-step routines, hundreds of competing products, ingredient overload, and confusing brand claims. At the same time, Gen Z consumers were increasingly seeking simpler routines, effective ingredients, clean aesthetics, and authentic recommendations.</p>
+    <p>Rhode positioned itself directly as the answer. Instead of adding to the noise, it launched with only three products — the <strong>Peptide Glazing Fluid</strong>, <strong>Barrier Restore Cream</strong>, and <strong>Peptide Lip Treatment</strong> — with a simple guiding message: <strong>Healthy skin first. Makeup second.</strong> This reduced consumer confusion and made purchase decisions effortless.</p>
+    <div class="insight-box">
+      <p class="label">Key Insight</p>
+      <p>In a saturated market, radical simplicity becomes a competitive advantage. Rhode didn't compete on product volume — it competed on clarity of purpose.</p>
+    </div>
+  </div>
+
+  <!-- MARKETING STRATEGY -->
+  <div class="cs-section">
+    <p class="cs-section-label">Marketing Strategy</p>
+    <h2 class="cs-section-title">Four Pillars That Drove Growth</h2>
+    <div class="cs-divider"></div>
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <div class="strategy-num">1</div>
+        <div class="strategy-title">Founder-Led Marketing</div>
+        <div class="strategy-desc">Rather than using Hailey Bieber as a traditional spokesperson, Rhode made her the product demonstration. Morning skincare videos, GRWM content, and tutorials showed Rhode naturally integrated into her life. Consumers felt they were discovering products, not being sold to. Rhode transformed a celebrity into a living case study for the brand.</div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-num">2</div>
+        <div class="strategy-title">Trend Creation, Not Trend Following</div>
+        <div class="strategy-desc">Rhode popularized cultural moments like Glazed Donut Skin, Strawberry Girl Makeup, and Latte Makeup — trends that spread organically across TikTok and Instagram. Crucially, consumers wanted the exact products Hailey used, creating massive organic demand. Most brands chase trends. Rhode created them.</div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-num">3</div>
+        <div class="strategy-title">Strategic Scarcity</div>
+        <div class="strategy-desc">Rhode intentionally launched with very few products. This made decision-making easier, drove higher conversion rates, reduced inventory complexity, and built stronger hero products. Consumers quickly internalized: "If Rhode sells it, it must matter." Scarcity amplified perceived value.</div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-num">4</div>
+        <div class="strategy-title">Aesthetic Consistency</div>
+        <div class="strategy-desc">Across packaging, website, social media, and campaign photography, everything communicated minimalism, luxury, clean beauty, and modern femininity. The brand became instantly recognizable. Consumers weren't just buying skincare — they were buying into an aesthetic identity.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONSUMER BEHAVIOR -->
+  <div class="cs-section">
+    <p class="cs-section-label">Consumer Behavior Analysis</p>
+    <h2 class="cs-section-title">Why Consumers Bought Rhode</h2>
+    <div class="cs-divider"></div>
+    <p>Rhode succeeded because it addressed consumer needs at three levels simultaneously, creating a powerful purchase motivation loop.</p>
+    <div class="needs-grid">
+      <div class="need-card">
+        <div class="need-type">Functional Need</div>
+        <div class="need-items">Hydration and skin barrier support<br>Simple, effective routines<br>Clean, trustworthy ingredients</div>
+      </div>
+      <div class="need-card">
+        <div class="need-type">Emotional Need</div>
+        <div class="need-items">Aspiration to emulate Hailey<br>Participation in beauty culture<br>Belonging to a community</div>
+      </div>
+      <div class="need-card">
+        <div class="need-type">Social Need</div>
+        <div class="need-items">Signaling trend awareness<br>Demonstrating beauty expertise<br>Participating in online culture</div>
+      </div>
+    </div>
+    <div class="insight-box">
+      <p class="label">Consumer Behavior Insight</p>
+      <p>Rhode created strong social proof at every level. Posting Rhode products on social media wasn't just sharing a purchase — it was a signal of cultural participation. This turned customers into unpaid brand ambassadors.</p>
+    </div>
+  </div>
+
+  <!-- DISTRIBUTION -->
+  <div class="cs-section">
+    <p class="cs-section-label">Distribution Strategy</p>
+    <h2 class="cs-section-title">A Disciplined Two-Phase Approach</h2>
+    <div class="cs-divider"></div>
+    <p><strong>Phase 1 — Direct-to-Consumer:</strong> Rhode initially sold exclusively through its own website. This allowed the brand to capture higher margins, collect direct customer data, maintain full brand control, and build demand organically before expanding. Starting DTC was a deliberate choice, not a limitation.</p>
+    <p><strong>Phase 2 — Sephora Expansion:</strong> After proving demand, Rhode expanded into Sephora — gaining greater credibility, enabling physical product testing, and dramatically increasing international reach. The move expanded accessibility while preserving brand prestige, because the demand had already been proven.</p>
+    <div class="insight-box">
+      <p class="label">Distribution Lesson</p>
+      <p>Rhode's two-phase approach demonstrates how strategic patience in distribution creates stronger market entry. By building demand before expanding, the Sephora launch felt like a response to consumer pull rather than a push for sales.</p>
+    </div>
+  </div>
+
+  <!-- SWOT -->
+  <div class="cs-section">
+    <p class="cs-section-label">SWOT Analysis</p>
+    <h2 class="cs-section-title">Evaluating Rhode's Position</h2>
+    <div class="cs-divider"></div>
+    <div class="swot-grid">
+      <div class="swot-card s">
+        <div class="swot-label">Strengths</div>
+        <ul class="swot-list">
+          <li>Massive founder influence and authentic reach</li>
+          <li>Strong, instantly recognizable visual identity</li>
+          <li>Viral organic social media presence</li>
+          <li>High customer loyalty and brand advocacy</li>
+        </ul>
+      </div>
+      <div class="swot-card w">
+        <div class="swot-label">Weaknesses</div>
+        <ul class="swot-list">
+          <li>Heavy dependence on Hailey Bieber's personal brand</li>
+          <li>Limited product portfolio reduces revenue ceiling</li>
+          <li>Potential for trend fatigue over time</li>
+        </ul>
+      </div>
+      <div class="swot-card o">
+        <div class="swot-label">Opportunities</div>
+        <ul class="swot-list">
+          <li>International market expansion</li>
+          <li>Growing Sephora footprint globally</li>
+          <li>Adjacent product categories (makeup, body care)</li>
+          <li>Men's skincare market entry</li>
+        </ul>
+      </div>
+      <div class="swot-card t">
+        <div class="swot-label">Threats</div>
+        <ul class="swot-list">
+          <li>Highly competitive beauty market dynamics</li>
+          <li>Rapid shifts in social media trends</li>
+          <li>Celebrity brand saturation among consumers</li>
+          <li>Consumer preference shifts post-acquisition</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSONS -->
+  <div class="cs-section">
+    <p class="cs-section-label">Marketing Takeaways</p>
+    <h2 class="cs-section-title">Five Lessons from Rhode's Growth</h2>
+    <div class="cs-divider"></div>
+    <div class="lessons-list">
+      <div class="lesson-item"><div class="lesson-num">1</div><div class="lesson-text"><strong>Build a community before scaling products.</strong> Rhode's community came first. Products followed the demand it had already created.</div></div>
+      <div class="lesson-item"><div class="lesson-num">2</div><div class="lesson-text"><strong>Simple product lines can outperform large catalogs.</strong> Three hero products that consumers understand deeply beat fifty products nobody remembers.</div></div>
+      <div class="lesson-item"><div class="lesson-num">3</div><div class="lesson-text"><strong>Consumers buy identities, not products.</strong> Rhode sold simplicity, aspiration, and belonging — the skincare was the vehicle, not the destination.</div></div>
+      <div class="lesson-item"><div class="lesson-num">4</div><div class="lesson-text"><strong>Founder-led storytelling can be more effective than traditional advertising.</strong> Authentic integration into a founder's real life builds deeper trust than any campaign.</div></div>
+      <div class="lesson-item"><div class="lesson-num">5</div><div class="lesson-text"><strong>Creating cultural moments is more powerful than reacting to them.</strong> Rhode didn't wait for trends — it invented the vocabulary consumers used to talk about skincare.</div></div>
+    </div>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="conclusion">
+    <p class="cs-section-label">Conclusion</p>
+    <h2 class="cs-section-title">What Rhode Really Sold</h2>
+    <div class="cs-divider"></div>
+    <p>Rhode succeeded because it wasn't really selling skincare. It was selling simplicity, aspiration, community, and identity. The brand combined influencer power, disciplined product development, visual consistency, and social media strategy into a marketing engine that transformed a three-product startup into a billion-dollar brand in under three years.</p>
+    <p style="margin-top:1rem;">The acquisition by e.l.f. Beauty validates the model — but Rhode's most valuable lesson isn't about celebrity or budget. It's about the power of knowing exactly what your brand stands for and refusing to dilute it.</p>
+  </div>
+
+</div>
+
+<div class="cs-footer">
+  <p>Case study by Pragnya Madiraju · Arizona State University</p>
+  <a href="pragnya-portfolio.html">← Back to Portfolio</a>
+</div>
+
+</body>
+</html>
